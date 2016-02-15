@@ -4,7 +4,7 @@
 #
 Name     : pep8
 Version  : 1.5.7
-Release  : 13
+Release  : 14
 URL      : https://pypi.python.org/packages/source/p/pep8/pep8-1.5.7.tar.gz
 Source0  : https://pypi.python.org/packages/source/p/pep8/pep8-1.5.7.tar.gz
 Summary  : Python style guide checker
