@@ -4,7 +4,7 @@
 #
 Name     : pep8
 Version  : 1.7.0
-Release  : 20
+Release  : 21
 URL      : http://pypi.debian.net/pep8/pep8-1.7.0.tar.gz
 Source0  : http://pypi.debian.net/pep8/pep8-1.7.0.tar.gz
 Summary  : Python style guide checker
