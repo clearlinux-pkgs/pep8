@@ -4,7 +4,7 @@
 #
 Name     : pep8
 Version  : 1.7.0
-Release  : 23
+Release  : 24
 URL      : http://pypi.debian.net/pep8/pep8-1.7.0.tar.gz
 Source0  : http://pypi.debian.net/pep8/pep8-1.7.0.tar.gz
 Summary  : Python style guide checker
@@ -19,10 +19,10 @@ BuildRequires : python3-dev
 BuildRequires : setuptools
 
 %description
-pep8 - Python style guide checker
 =================================
-pep8 is a tool to check your Python code against some of the style
-conventions in `PEP 8`_.
+        
+        pep8 is a tool to check your Python code against some of the style
+        conventions in `PEP 8`_.
 
 %package bin
 Summary: bin components for the pep8 package.
@@ -44,8 +44,11 @@ python components for the pep8 package.
 %setup -q -n pep8-1.7.0
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1484561791
+export SOURCE_DATE_EPOCH=1503071995
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -53,12 +56,15 @@ python3 setup.py build -b py3
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python2.7/site-packages python2 setup.py test
+PYTHONPATH=%{buildroot}/usr/lib/python3.6/site-packages python3 setup.py test
 %install
-export SOURCE_DATE_EPOCH=1484561791
+export SOURCE_DATE_EPOCH=1503071995
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
@@ -69,4 +75,5 @@ python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+/usr/lib/python2*/*
+/usr/lib/python3*/*
