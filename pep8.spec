@@ -4,7 +4,7 @@
 #
 Name     : pep8
 Version  : 1.7.0
-Release  : 31
+Release  : 32
 URL      : http://pypi.debian.net/pep8/pep8-1.7.0.tar.gz
 Source0  : http://pypi.debian.net/pep8/pep8-1.7.0.tar.gz
 Summary  : Python style guide checker
@@ -15,7 +15,6 @@ Requires: pep8-python3
 Requires: pep8-python
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
 
@@ -59,14 +58,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1523297199
+export SOURCE_DATE_EPOCH=1530377198
 python3 setup.py build -b py3
 
 %check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.6/site-packages python3 setup.py test
+PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test
 %install
 rm -rf %{buildroot}
 python3 -tt setup.py build -b py3 install --root=%{buildroot}
