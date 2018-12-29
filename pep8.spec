@@ -4,19 +4,16 @@
 #
 Name     : pep8
 Version  : 1.7.0
-Release  : 41
+Release  : 42
 URL      : http://pypi.debian.net/pep8/pep8-1.7.0.tar.gz
 Source0  : http://pypi.debian.net/pep8/pep8-1.7.0.tar.gz
 Summary  : Python style guide checker
 Group    : Development/Tools
 License  : MIT
-Requires: pep8-bin
-Requires: pep8-python3
-Requires: pep8-python
-BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python3-dev
-BuildRequires : setuptools
+Requires: pep8-bin = %{version}-%{release}
+Requires: pep8-python = %{version}-%{release}
+Requires: pep8-python3 = %{version}-%{release}
+BuildRequires : buildreq-distutils3
 
 %description
 =================================
@@ -35,7 +32,7 @@ bin components for the pep8 package.
 %package python
 Summary: python components for the pep8 package.
 Group: Default
-Requires: pep8-python3
+Requires: pep8-python3 = %{version}-%{release}
 
 %description python
 python components for the pep8 package.
@@ -58,17 +55,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530377198
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1546048364
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test
 %install
 rm -rf %{buildroot}
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----

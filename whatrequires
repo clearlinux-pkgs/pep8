@@ -1,1 +1,5 @@
 # This file contains recursive sources that require this package
+blockdiag
+gabbi
+ovirt-guest-agent
+swig
