@@ -4,7 +4,7 @@
 #
 Name     : pep8
 Version  : 1.7.0
-Release  : 49
+Release  : 50
 URL      : https://files.pythonhosted.org/packages/3e/b5/1f717b85fbf5d43d81e3c603a7a2f64c9f1dabc69a1e7745bd394cc06404/pep8-1.7.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/3e/b5/1f717b85fbf5d43d81e3c603a7a2f64c9f1dabc69a1e7745bd394cc06404/pep8-1.7.0.tar.gz
 Summary  : Python style guide checker
@@ -16,10 +16,10 @@ Requires: pep8-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
+pep8 - Python style guide checker
 =================================
-        
-        pep8 is a tool to check your Python code against some of the style
-        conventions in `PEP 8`_.
+pep8 is a tool to check your Python code against some of the style
+conventions in `PEP 8`_.
 
 %package bin
 Summary: bin components for the pep8 package.
@@ -42,6 +42,7 @@ python components for the pep8 package.
 Summary: python3 components for the pep8 package.
 Group: Default
 Requires: python3-core
+Provides: pypi(pep8)
 
 %description python3
 python3 components for the pep8 package.
@@ -49,13 +50,20 @@ python3 components for the pep8 package.
 
 %prep
 %setup -q -n pep8-1.7.0
+cd %{_builddir}/pep8-1.7.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1546475653
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1583201660
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 

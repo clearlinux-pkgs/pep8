@@ -1,5 +1,7 @@
 # This file contains recursive sources that require this package
+QGIS
+barbican
 blockdiag
-gabbi
+mycroft-core
 ovirt-guest-agent
 swig
